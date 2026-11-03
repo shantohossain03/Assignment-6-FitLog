@@ -1,0 +1,166 @@
+import ReadButton from '@/app/components/bookDetails/ReadButton';
+import WishlistButton from '@/app/components/bookDetails/WishlistButton';
+import { IBook } from '@/app/types/BookTypes';
+import Image from 'next/image';
+import React from 'react'
+
+interface DetailsPageProps {
+  params: Promise<{
+    Id: string;
+  }>;
+}
+
+const getBooks = async () => {
+  const res = await fetch('http://localhost:3000/booksData.json')
+  const data = await res.json()
+  return data;
+}
+
+// This is our main page.
+
+const DetailsPage = async ({ params }: DetailsPageProps) => {
+  const booksData = await getBooks();
+  const { Id } = await params;
+  const book = booksData.find((book: IBook) => String(book.bookId) === String(Id)) as IBook;
+  console.log(book, "This is my own created dynamic data page");
+
+
+  return (
+    <div className="container mx-auto mt-20 p-5">
+      <div className="flex flex-col md:flex-row gap-8 bg-base-200 rounded-2xl shadow-xl p-6">
+
+        {/* Book Image */}
+        <div className="flex justify-center items-start">
+          <Image
+            src={book.image}
+            alt={book.bookName}
+            width={250}
+            height={350}
+            unoptimized
+          />
+        </div>
+
+        {/* Book Details */}
+        <div className="flex-1 flex flex-col gap-4">
+
+          <div>
+            <h1 className="text-3xl font-bold">
+              {book.bookName}
+            </h1>
+            <p className="text-lg text-gray-500 mt-1">
+              By {book.author}
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-3 items-center">
+            <span className="badge badge-primary badge-lg">
+              {book.category}
+            </span>
+
+            <span className="badge badge-warning badge-lg">
+              ⭐ {book.rating} / 5
+            </span>
+          </div>
+
+          <div className="divider my-0"></div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+
+            <div>
+              <p className="text-sm text-gray-500">Total Pages</p>
+              <h3 className="font-semibold">{book.totalPages}</h3>
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-500">Publisher</p>
+              <h3 className="font-semibold">{book.publisher}</h3>
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-500">Published Year</p>
+              <h3 className="font-semibold">{book.yearOfPublishing}</h3>
+            </div>
+
+          </div>
+
+          <div className="divider my-0"></div>
+
+          {/* Tags */}
+          <div>
+            <h2 className="font-bold mb-2">Book Tags</h2>
+            <div className="flex flex-wrap gap-2">
+              {book.tags.map((tag: string, index: number) => (
+                <span key={index} className="badge badge-outline">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Review */}
+          <div>
+            <h2 className="text-xl font-bold mb-2">
+              Book Review
+            </h2>
+            <p className="text-gray-600 leading-7 text-justify">
+              {book.review}
+            </p>
+          </div>
+
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 mt-4">
+
+            <ReadButton book={book} />
+
+            <WishlistButton book={book} />
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  )
+
+
+}
+
+export default DetailsPage;
+
+
+______________________________________________________________________________________________________
+______________________________________________________________________________________________________
+
+
+
+
+import React from 'react'
+import BookCard from '../BookCard'
+import { IBook } from '@/app/types/BookTypes'
+
+const getBooks = async () => {
+    const res = await fetch('http://localhost:3000/booksData.json')
+    const data = await res.json()
+    return data;
+}
+
+const Books = async () => {
+    const booksData = await getBooks()
+
+    return (
+        <div className="container mx-auto mt-10 px-4 bg-slate-200 p-5">
+            <h1 className="font-bold text-3xl mb-8 text-center">
+                Books Collection
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 my-15">
+                {booksData.slice(0,6).map((book : IBook, ind : number) => (
+                    <BookCard key={ind} book={book} />
+                ))}
+            </div>
+        </div>
+    )
+}
+
+export default Books;
