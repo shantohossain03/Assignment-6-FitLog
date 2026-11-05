@@ -1,13 +1,14 @@
 'use client'
 
 import React, { createContext, ReactNode, useState } from 'react'
+import { IExercise } from '../type/type';
 
-export const ExerciseContext = createContext({});
+export const ExerciseContext = createContext<any>({});
 
 function ExerProvider({children}: {children: ReactNode}) {
 
-  const [addTodays, setAddTodays] = useState([]); 
-  const [saved, setSaved] = useState([]); 
+  const [addTodays, setAddTodays] = useState<IExercise[]>([]); 
+  const [saved, setSaved] = useState<IExercise[]>([]); 
 
   const sharedData = {
     addTodays,

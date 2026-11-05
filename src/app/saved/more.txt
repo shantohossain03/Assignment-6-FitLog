@@ -1,0 +1,75 @@
+{/* Headings */}
+            <div>
+                <h1 className='font-bold text-3xl'>MY PLAN</h1>
+                <p className='text-sm'>Cap of five lifts for today. Finish them, then load more.</p>
+            </div>
+
+            {/* Number box  */}
+            <div className='grid grid-cols-3 gap-5 h-25 items-center bg-[#15171d] border border-[#292d37] rounded-xl overflow-hidden p-5 text-center' >
+                <div>
+                    <h1>Exercises</h1>
+                    <h1 className='font-bold text-3xl'> { } </h1>
+                </div>
+                <div>
+                    <h1>Minutes</h1>
+                    <h1 className='font-bold text-3xl'> { } </h1>
+                </div>
+                <div>
+                    <h1>Calories</h1>
+                    <h1 className='font-bold text-3xl'> { } </h1>
+                </div>
+            </div>
+
+
+
+-----------------------------------------------------------
+
+
+
+{addTodays.map((exercise : IExercise, index : number) => (
+                        <div
+                            key={`${exercise.id}-${index}`}
+                            className="flex items-center justify-between gap-5 p-3 rounded-xl border border-[#292d37] bg-[#15171d]"
+                        >
+
+                            {/* Image */}
+                            <img
+                                src={exercise.image}
+                                alt={exercise.name}
+                                className="w-28 h-20 object-cover rounded-lg"
+                            />
+
+                            {/* Exercise Information */}
+                            <div className="flex-1 flex flex-col gap-1">
+                                <h2 className="font-bold uppercase text-sm">
+                                    {exercise.name}
+                                </h2>
+
+                                <p className="text-xs text-gray-400">
+                                    {exercise.equipment}
+                                </p>
+
+                                <div className="flex items-center gap-4 text-xs text-gray-300 mt-1">
+                                    <span>◷ {exercise.duration} min</span>
+                                    <span>🔥 {exercise.caloriesBurned} kcal</span>
+                                    <span>⭐ {exercise.rating}</span>
+                                </div>
+                            </div>
+
+                            {/* Action Buttons */}
+                            <div className="flex items-center gap-3">
+                                <button className="btn btn-sm btn-outline rounded-full">
+                                    View Details
+                                </button>
+
+                                <button className="btn btn-sm bg-lime-400 text-black border-none rounded-full">
+                                    ✓ Mark as Done
+                                </button>
+
+                                <button className="btn btn-ghost btn-sm text-gray-400">
+                                    ✕
+                                </button>
+                            </div>
+
+                        </div>
+                    ))}
