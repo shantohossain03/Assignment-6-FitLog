@@ -149,7 +149,8 @@ function MyPlanPage() {
 
 
 
-                                <button className="btn btn-ghost btn-sm text-gray-400">
+                                <button className="btn btn-ghost btn-sm text-gray-400"
+                                    onClick={() => setSaved(saved.filter((_, i) => i !== index))}>
                                     ✕
                                 </button>
                             </div>

@@ -1,12 +1,15 @@
 "use client";
+
 import Image from 'next/image';
-import React from 'react'
+import React, { useContext } from 'react'
 import Logo from '@/app/assets/logo.png'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { ExerciseContext } from '@/app/context/exerContext';
 
 function Navbar() {
     const pathname = usePathname();
+    const { addTodays, saved, } = useContext(ExerciseContext);
     return (
         <div className="navbar bg-base-100 shadow-sm container mx-auto py-4">
             <div className="navbar-start">
@@ -52,8 +55,13 @@ function Navbar() {
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Button</a>
+            <div className="navbar-end gap-10">
+                <h1>Plan <span className="rounded-full bg-[#c6ff00] text-black font-bold text-xs px-3 py-1">
+                    {addTodays.length}
+                </span> </h1>
+                <h1>Saved <span className="rounded-full bg-[#c6ff00] text-black font-bold text-xs px-3 py-1">
+                    {saved.length}
+                </span> </h1>
             </div>
         </div>
     )
