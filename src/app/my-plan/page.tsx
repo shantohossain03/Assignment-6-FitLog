@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 function MyPlanPage() {
 
-    const { addTodays, saved } = useContext(ExerciseContext);
+    const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
     console.log("TODAY'S PLAN:", addTodays);
     console.log("SAVED:", saved);
 
@@ -88,7 +88,8 @@ function MyPlanPage() {
                                         ✓ Mark as Done
                                     </button>
 
-                                    <button className="btn btn-ghost btn-sm text-gray-400">
+                                    <button className="btn btn-ghost btn-sm text-gray-400"
+                                        onClick={() => setAddTodays(addTodays.filter((_, i) => i !== index))}>
                                         ✕
                                     </button>
                                 </div>
