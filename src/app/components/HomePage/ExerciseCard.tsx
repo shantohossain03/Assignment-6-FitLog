@@ -14,7 +14,7 @@ function ExerciseCard({ exercise }: { exercise: IExercise }) {
             src={exercise.image}
             alt={exercise.name}
             className="w-full h-full object-cover"
-            style={{ objectPosition: "center calc(50% + 20px)" }}
+            style={{ objectPosition: "center calc(50% + 80px)" }}
           />
         </figure>
 

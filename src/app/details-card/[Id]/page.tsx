@@ -1,3 +1,5 @@
+import AddTodaysButton from '@/app/ButtonAction/addTodaysButton';
+import SavedButton from '@/app/ButtonAction/savedButton';
 import React from 'react'
 
 const GetExercise = async (): Promise<IExercise[]> => {
@@ -102,13 +104,10 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 mt-2">
-            <button className="bg-[#c6ff00] text-black font-bold text-xs px-5 py-3 rounded-lg hover:bg-[#b4eb00] transition">
-              ▣ Add to today's plan
-            </button>
+            
+            <AddTodaysButton exercise={exercise} />
 
-            <button className="border border-[#292d37] text-white font-medium text-xs px-5 py-3 rounded-lg hover:border-[#c6ff00] transition">
-              ♧ Save for later
-            </button>
+            <SavedButton exercise={exercise} />
           </div>
 
         </div>
