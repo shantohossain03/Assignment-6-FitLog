@@ -82,7 +82,7 @@ function MyPlanPage() {
 
             {/* Sorting */}
 
-            <div className='justify-end flex flex-row gap-3 items-center  mt-10 mb-[-20px]'>
+            <div className='flex flex-row justify-end items-center gap-3 mt-10 mb-[-20px]'>
                 <div className='whitespace-nowrap'>
                     <h1>Sort by</h1>
                 </div>
