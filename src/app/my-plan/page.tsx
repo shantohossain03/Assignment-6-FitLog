@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 function MyPlanPage() {
 
     const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
-    const [isDone, setIsDone] = useState(false);
+    const [doneExercises, setDoneExercises] = useState<string[]>([]);;
     const [activeTab, setActiveTab] = useState("saved");
     const [sortBy, setSortBy] = useState("Duration");
 
@@ -151,9 +151,18 @@ function MyPlanPage() {
                                     </Link>
 
                                     <button className="btn btn-sm bg-lime-400 text-black border-none rounded-full"
-                                        disabled={isDone}
-                                        onClick={() => setIsDone(true)}>
-                                        ✓ Mark as Done
+                                        disabled={doneExercises.includes(exercise.id)}
+                                        onClick={() => {
+                                            setDoneExercises([...doneExercises, exercise.id]);
+
+                                            toast.success(`${exercise.name} marked as done!`, {
+                                                position: "top-center",
+                                                autoClose: 2500,
+                                            });
+                                        }}
+
+                                    >
+                                        ✓ {doneExercises.includes(exercise.id) ? "Completed" : "Mark as Done"}
                                     </button>
 
                                     <button className="btn btn-ghost btn-sm text-gray-400"
