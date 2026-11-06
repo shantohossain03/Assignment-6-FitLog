@@ -31,13 +31,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <ToastProvider />
         <ExerProvider>
-          <nav className="border-b sticky top-0 z-50">
+          <nav className="border-b border-white/20 sticky top-0 z-50">
             <Navbar />
           </nav>
 
           {children}
 
-          <footer className="border-t-1">
+          <footer className="border-t border-white/20">
             <Footer />
           </footer>
         </ExerProvider>

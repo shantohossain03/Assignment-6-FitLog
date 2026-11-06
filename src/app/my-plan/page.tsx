@@ -11,6 +11,36 @@ function MyPlanPage() {
     const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
     const [isDone, setIsDone] = useState(false);
     const [activeTab, setActiveTab] = useState("saved");
+    const [sortBy, setSortBy] = useState("Duration");
+
+    const sortedExercises = [...saved].sort((a, b) => {
+        if (sortBy === "Duration") {
+            return a.duration - b.duration;
+        }
+
+        if (sortBy === "Calories") {
+            return a.caloriesBurned - b.caloriesBurned;
+        }
+
+        if (sortBy === "Rating") {
+            return b.rating - a.rating;
+        }
+    });
+
+
+    const sortedTodays = [...addTodays].sort((a, b) => {
+        if (sortBy === "Duration") {
+            return a.duration - b.duration;
+        }
+
+        if (sortBy === "Calories") {
+            return a.caloriesBurned - b.caloriesBurned;
+        }
+
+        if (sortBy === "Rating") {
+            return b.rating - a.rating;
+        }
+    });
 
     // console.log("TODAY'S PLAN:", addTodays);
     // console.log("SAVED:", saved);
@@ -49,18 +79,40 @@ function MyPlanPage() {
 
 
 
+
+            {/* Sorting */}
+
+            <div className='justify-end flex flex-row gap-3 items-center  mt-10 mb-[-20px]'>
+                <div className='whitespace-nowrap'>
+                    <h1>Sort by</h1>
+                </div>
+
+                <select
+                    className="select [&::picker(select)]:max-h-26 w-50"
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                >
+
+                    <option>Duration</option>
+                    <option>Calories</option>
+                    <option>Rating</option>
+                </select>
+            </div>
+
+
+
             {/* Exercise list */}
 
-            {/* name of each tab group should be unique */}
             <div className="tabs tabs-box">
 
 
                 {/* Add today´s Tab */}
+
                 <input type="radio" name="my_tabs_6" className="tab" aria-label="Today's Plan" onChange={() => setActiveTab("today")} />
                 <div className="tab-content bg-base-100 border-base-300 p-2 sm:p-6">
 
                     {addTodays.length ?
-                        addTodays.map((exercise: IExercise, index: number) => (
+                        sortedTodays.map((exercise: IExercise, index: number) => (
                             <div
                                 key={`${exercise.id}-${index}`}
                                 className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-5 p-3 rounded-xl border border-[#292d37] bg-[#15171d]"
@@ -106,14 +158,14 @@ function MyPlanPage() {
 
                                     <button className="btn btn-ghost btn-sm text-gray-400"
                                         onClick={() => {
-                                        setAddTodays(addTodays.filter((_, i) => i !== index));
-                                        toast.error(`"${exercise.name}" Removed from your Today's Plan Item!`,
-                                            {
-                                                position: "top-center",
-                                                autoClose: 2500,
-                                            }
-                                        )
-                                    }}>
+                                            setAddTodays(addTodays.filter((_, i) => i !== index));
+                                            toast.error(`"${exercise.name}" Removed from your Today's Plan Item!`,
+                                                {
+                                                    position: "top-center",
+                                                    autoClose: 2500,
+                                                }
+                                            )
+                                        }}>
                                         ✕
                                     </button>
                                 </div>
@@ -134,7 +186,7 @@ function MyPlanPage() {
                     onChange={() => setActiveTab("saved")} />
                 <div className="tab-content bg-base-100 border-base-300 p-2 sm:p-6">
 
-                    {saved.length ? saved.map((exercise: IExercise, index: number) => (
+                    {saved.length ? sortedExercises.map((exercise: IExercise, index: number) => (
                         <div
                             key={`${exercise.id}-${index}`}
                             className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-5 p-3 rounded-xl border border-[#292d37] bg-[#15171d]"
@@ -196,9 +248,11 @@ function MyPlanPage() {
                             <Link href="/"><button className='btn bg-[#aaff2b] text-black font-bold rounded-3xl mt-10'>Go to workouts</button></Link>
                         </div>}
                 </div>
+
             </div>
 
-        </div>
+
+        </div >
     )
 }
 
