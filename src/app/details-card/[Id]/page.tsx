@@ -17,7 +17,7 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
 
   console.log(exercises, "you tried this");
   return (
-    <div className='p-20'>
+    <div className='p-4 md:p-8 lg:p-20'>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-start">
 
@@ -26,7 +26,7 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
           <img
             src={exercise.image}
             alt={exercise.name}
-            className="w-full h-[350px] lg:h-[550px] object-cover rounded-2xl"
+            className="w-full h-[280px] sm:h-[350px] lg:h-[550px] object-cover rounded-2xl"
           />
         </div>
 
@@ -35,11 +35,11 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
 
           {/* Title & Description */}
           <div>
-            <h1 className="text-white text-3xl font-extrabold uppercase">
+            <h1 className="text-white text-2xl sm:text-3xl font-extrabold uppercase">
               {exercise.name}
             </h1>
 
-            <p className="text-gray-400 text-sm mt-2 leading-relaxed">
+            <p className="text-gray-400 text-xs sm:text-sm mt-2 leading-relaxed">
               {exercise.description}
             </p>
           </div>
@@ -69,14 +69,13 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
             ].map((spec, index) => (
               <div
                 key={spec.label}
-                className={`flex justify-between items-center px-4 py-4 text-sm ${index !== 6 ? 'border-b border-[#292d37]' : ''
-                  }`}
+                className={`flex justify-between items-center gap-3 px-4 py-3 sm:py-4 text-sm ${index !== 6 ? 'border-b border-[#292d37]' : ''}`}
               >
                 <span className="text-gray-400 text-xs font-semibold">
                   {spec.label}
                 </span>
 
-                <span className="text-white">
+                <span className="text-white text-right break-words">
                   {spec.value}
                 </span>
               </div>
@@ -93,7 +92,7 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
               {exercise.instructions.map((instruction, index) => (
                 <li
                   key={index}
-                  className="flex gap-3 text-gray-400 text-sm leading-relaxed"
+                  className="flex gap-3 text-gray-400 text-xs sm:text-sm leading-relaxed"
                 >
                   <span>{index + 1}.</span>
                   <span>{instruction}</span>
@@ -104,7 +103,7 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-3 mt-2">
-            
+
             <AddTodaysButton exercise={exercise} />
 
             <SavedButton exercise={exercise} />

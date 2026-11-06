@@ -11,7 +11,7 @@ function Navbar() {
     const pathname = usePathname();
     const { addTodays, saved, } = useContext(ExerciseContext);
     return (
-        <div className="navbar bg-base-100 shadow-sm container mx-auto py-4">
+        <div className="navbar bg-base-100 shadow-sm container mx-auto px-3 sm:px-4 py-3 sm:py-4">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -55,7 +55,7 @@ function Navbar() {
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end gap-10">
+            <div className="navbar-end gap-3 md:gap-10 flex-nowrap">
                 <h1>Plan <span className="rounded-full bg-[#c6ff00] text-black font-bold text-xs px-3 py-1">
                     {addTodays.length}
                 </span> </h1>

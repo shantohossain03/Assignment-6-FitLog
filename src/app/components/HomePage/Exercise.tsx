@@ -18,7 +18,7 @@ const Exercise = async () => {
       <h1 className='text-2xl font-bold'>THE LIBRARY</h1>
       <p>Twelve lifts covering every major muscle group.</p>
 
-      <div className='grid grid-cols-3 gap-5 mt-8'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-8'>
         {
           exercises.map((exercise, ind) => (
             <ExerciseCard key={ind} exercise={exercise} />
