@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ExerciseContext } from '../context/exerContext';
 import { IExercise } from '../type/type';
 import Link from 'next/link';
@@ -8,8 +8,11 @@ import Link from 'next/link';
 function MyPlanPage() {
 
     const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
-    console.log("TODAY'S PLAN:", addTodays);
-    console.log("SAVED:", saved);
+    const [isDone, setIsDone] = useState(false);
+    const [activeTab, setActiveTab] = useState("saved");
+
+    // console.log("TODAY'S PLAN:", addTodays);
+    // console.log("SAVED:", saved);
 
     return (
         <div className='container mx-auto my-10 flex flex-col gap-10'>
@@ -19,21 +22,31 @@ function MyPlanPage() {
                 <p className='text-sm'>Cap of five lifts for today. Finish them, then load more.</p>
             </div>
 
-            {/* Number box  */}
+
+
+            {/* Number box....... [ ]  */}
+
             <div className='grid grid-cols-3 gap-5 h-25 items-center bg-[#15171d] border border-[#292d37] rounded-xl overflow-hidden p-5 text-center' >
                 <div>
                     <h1>Exercises</h1>
-                    <h1 className='font-bold text-3xl'> {addTodays.length + saved.length} </h1>
+                    <h1 className='font-bold text-3xl'> {activeTab === "today" ? addTodays.length : saved.length} </h1>
                 </div>
                 <div>
                     <h1>Minutes</h1>
-                    <h1 className='font-bold text-3xl'> {addTodays.reduce((total, exercise) => total + exercise.duration, 0)} </h1>
+                    <h1 className='font-bold text-3xl'> {activeTab === "today"
+                        ? addTodays.reduce((total, exercise) => total + exercise.duration, 0)
+                        : saved.reduce((total, exercise) => total + exercise.duration, 0)} </h1>
                 </div>
                 <div>
                     <h1>Calories</h1>
-                    <h1 className='font-bold text-3xl'> {addTodays.reduce((total, exercise) => total + exercise.caloriesBurned, 0)} </h1>
+                    <h1 className='font-bold text-3xl'> {activeTab === "today"
+                        ? addTodays.reduce((total, exercise) => total + exercise.caloriesBurned, 0)
+                        : saved.reduce((total, exercise) => total + exercise.caloriesBurned, 0)} </h1>
                 </div>
             </div>
+
+
+
 
             {/* Exercise list */}
 
@@ -42,7 +55,7 @@ function MyPlanPage() {
 
 
                 {/* Add today´s Tab */}
-                <input type="radio" name="my_tabs_6" className="tab" aria-label="Today's Plan" />
+                <input type="radio" name="my_tabs_6" className="tab" aria-label="Today's Plan" onChange={() => setActiveTab("today")} />
                 <div className="tab-content bg-base-100 border-base-300 p-6">
 
                     {addTodays.length ?
@@ -84,7 +97,9 @@ function MyPlanPage() {
                                         </button>
                                     </Link>
 
-                                    <button className="btn btn-sm bg-lime-400 text-black border-none rounded-full">
+                                    <button className="btn btn-sm bg-lime-400 text-black border-none rounded-full"
+                                        disabled={isDone}
+                                        onClick={() => setIsDone(true)}>
                                         ✓ Mark as Done
                                     </button>
 
@@ -106,7 +121,8 @@ function MyPlanPage() {
 
 
                 {/* Saved Tab */}
-                <input type="radio" name="my_tabs_6" className="tab" aria-label="Saved" defaultChecked />
+                <input type="radio" name="my_tabs_6" className="tab" aria-label="Saved" defaultChecked
+                    onChange={() => setActiveTab("saved")} />
                 <div className="tab-content bg-base-100 border-base-300 p-6">
 
                     {saved.length ? saved.map((exercise: IExercise, index: number) => (

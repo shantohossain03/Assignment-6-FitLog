@@ -9,6 +9,10 @@ function SavedButton({ exercise }: { exercise: IExercise }) {
     const { saved, setSaved } = useContext(ExerciseContext);
 
     const handleSaved = (exercise: IExercise) => {
+        if (saved.some((item) => item.id === exercise.id)) {
+            alert("Already added!");
+            return;
+        }
         setSaved([...saved, exercise]);
         alert(`You've saved ${exercise.name} to your today's plan!`);
 

@@ -44,12 +44,12 @@ function Navbar() {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 flex gap-2">
                     <li>
-                        <Link href="/" className={`w-25 flex justify-center text-center ${pathname === "/" ? "font-bold text-[#bdff07] bg-[#a2ff002f]" : ""}`}>
+                        <Link href="/" className={`w-25 flex justify-center text-center ${pathname === "/" ? "font-bold text-[#bdff07] bg-[#a2ff002f] rounded-2xl" : ""}`}>
                             Workouts
                         </Link>
                     </li>
                     <li>
-                        <Link href="/my-plan" className={`w-25 flex justify-center text-center ${pathname === "/my-plan" ? "font-bold text-[#bdff07] bg-[#a2ff002f]" : ""}`}>
+                        <Link href="/my-plan" className={`w-25 flex justify-center text-center ${pathname === "/my-plan" ? "font-bold text-[#bdff07] bg-[#a2ff002f] rounded-2xl" : ""}`}>
                             My Plan
                         </Link>
                     </li>
