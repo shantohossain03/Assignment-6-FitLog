@@ -4,6 +4,7 @@ import React, { useContext, useState } from 'react'
 import { ExerciseContext } from '../context/exerContext';
 import { IExercise } from '../type/type';
 import Link from 'next/link';
+import { toast } from 'react-toastify';
 
 function MyPlanPage() {
 
@@ -104,7 +105,15 @@ function MyPlanPage() {
                                     </button>
 
                                     <button className="btn btn-ghost btn-sm text-gray-400"
-                                        onClick={() => setAddTodays(addTodays.filter((_, i) => i !== index))}>
+                                        onClick={() => {
+                                        setAddTodays(addTodays.filter((_, i) => i !== index));
+                                        toast.error(`"${exercise.name}" Removed from your Today's Plan Item!`,
+                                            {
+                                                position: "top-center",
+                                                autoClose: 2500,
+                                            }
+                                        )
+                                    }}>
                                         ✕
                                     </button>
                                 </div>
@@ -166,7 +175,15 @@ function MyPlanPage() {
 
 
                                 <button className="btn btn-ghost btn-sm text-gray-400"
-                                    onClick={() => setSaved(saved.filter((_, i) => i !== index))}>
+                                    onClick={() => {
+                                        setSaved(saved.filter((_, i) => i !== index));
+                                        toast.error(`"${exercise.name}" Removed from your Saved Item!`,
+                                            {
+                                                position: "top-center",
+                                                autoClose: 2500,
+                                            }
+                                        )
+                                    }}>
                                     ✕
                                 </button>
                             </div>

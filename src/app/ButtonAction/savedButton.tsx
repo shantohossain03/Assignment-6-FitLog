@@ -3,6 +3,7 @@
 import React, { useContext } from 'react'
 import { IExercise } from '@/app/type/type';
 import { ExerciseContext } from '../context/exerContext';
+import { toast } from 'react-toastify';
 
 function SavedButton({ exercise }: { exercise: IExercise }) {
 
@@ -10,11 +11,11 @@ function SavedButton({ exercise }: { exercise: IExercise }) {
 
     const handleSaved = (exercise: IExercise) => {
         if (saved.some((item) => item.id === exercise.id)) {
-            alert("Already added!");
+            toast.warn("Already saved!", {autoClose: 1500, position: "bottom-center"});
             return;
         }
         setSaved([...saved, exercise]);
-        alert(`You've saved ${exercise.name} to your today's plan!`);
+        toast.success(`Added "${exercise.name}" to your Saved Plan!`, { autoClose: 2500, position: "top-center"});
 
         // console.log(saved, "now saved");
     }

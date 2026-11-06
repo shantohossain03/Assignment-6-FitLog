@@ -3,6 +3,7 @@
 import React, { useContext } from 'react'
 import { IExercise } from '@/app/type/type';
 import { ExerciseContext } from '../context/exerContext';
+import { toast } from 'react-toastify';
 
 function AddTodaysButton({ exercise }: { exercise: IExercise }) {
 
@@ -10,11 +11,11 @@ function AddTodaysButton({ exercise }: { exercise: IExercise }) {
 
     const handleAddTodays = (exercise: IExercise) => {
         if (addTodays.some((item) => item.id === exercise.id)) {
-            alert("Already added!");
+            toast.warn("Already added!", {autoClose: 1500, position: "bottom-center"});
             return;
         }
         setAddTodays([...addTodays, exercise]);
-        alert(`You've added ${exercise.name} to your today's plan!`);
+        toast.success(`Added "${exercise.name}" to your Today's Plan!`, { autoClose: 2500, position: "top-center"});
 
         // console.log(addTodays, "now added");
     }
