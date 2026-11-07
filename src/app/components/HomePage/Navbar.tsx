@@ -5,7 +5,7 @@ import React, { useContext } from 'react'
 import Logo from '@/app/assets/logo.png'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ExerciseContext } from '@/app/context/exerContext';
+import { ExerciseContext } from '@/app/context/ExerContext';
 
 function Navbar() {
     const pathname = usePathname();

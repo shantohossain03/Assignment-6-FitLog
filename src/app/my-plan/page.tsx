@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useContext, useState } from 'react'
-import { ExerciseContext } from '@/app/context/exerContext';
+import { ExerciseContext } from '@/app/context/ExerContext';
 import { IExercise } from '../type/type';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
