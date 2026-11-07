@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useContext } from 'react'
+import React from 'react'
 import { IExercise } from '@/app/type/type';
-import { ExerciseContext, useExerciseContext } from '@/app/context/ExerContext';
+import { useExerciseContext } from '@/app/context/ExerContext';
 import { toast } from 'react-toastify';
 
 function SavedButton({ exercise }: { exercise: IExercise }) {
@@ -14,15 +14,19 @@ function SavedButton({ exercise }: { exercise: IExercise }) {
             toast.warn("Already saved!", { autoClose: 1500, position: "bottom-center" });
             return;
         }
-        setSaved([...saved, exercise]);
-        toast.success(`Added "${exercise.name}" to your Saved Plan!`, { autoClose: 2500, position: "top-center" });
 
-        // console.log(saved, "now saved");
+        setSaved([...saved, exercise]);
+        toast.success(`Added "${exercise.name}" to your Saved Plan!`, {
+            autoClose: 2500,
+            position: "top-center"
+        });
     }
 
     return (
-        <button className="border border-[#292d37] text-white font-medium text-xs px-5 py-3 rounded-lg hover:border-[#c6ff00] transition"
-            onClick={() => { handleSaved(exercise) }}>
+        <button
+            className="border border-[#292d37] text-white font-medium text-[10px] sm:text-xs px-3 sm:px-5 py-2 sm:py-3 rounded-lg hover:border-[#c6ff00] transition"
+            onClick={() => handleSaved(exercise)}
+        >
             ♧ Save for later
         </button>
     )
