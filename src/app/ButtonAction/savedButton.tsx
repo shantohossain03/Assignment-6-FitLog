@@ -2,7 +2,7 @@
 
 import React, { useContext } from 'react'
 import { IExercise } from '@/app/type/type';
-import { ExerciseContext } from '../context/exerContext';
+import { ExerciseContext } from '@/app/context/exerContext';
 import { toast } from 'react-toastify';
 
 function SavedButton({ exercise }: { exercise: IExercise }) {
