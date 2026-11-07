@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, ReactNode, useState } from 'react'
+import React, { createContext, ReactNode, useContext, useState } from 'react'
 import { IExercise } from '../type/type';
 
 
@@ -14,6 +14,17 @@ interface IExerciseContext {
 
 
 export const ExerciseContext = createContext<IExerciseContext | undefined>(undefined);
+
+export function useExerciseContext() {
+  const context = useContext(ExerciseContext);
+
+  if (!context) {
+    throw new Error("Component must be inside ExerProvider");
+  }
+
+  return context;
+}
+
 
 function ExerProvider({children}: {children: ReactNode}) {
 

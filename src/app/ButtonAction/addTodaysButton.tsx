@@ -2,12 +2,12 @@
 
 import React, { useContext } from 'react'
 import { IExercise } from '@/app/type/type';
-import { ExerciseContext } from '@/app/context/ExerContext';
+import { ExerciseContext, useExerciseContext } from '@/app/context/ExerContext';
 import { toast } from 'react-toastify';
 
 function AddTodaysButton({ exercise }: { exercise: IExercise }) {
 
-    const { addTodays, setAddTodays } = useContext(ExerciseContext);
+    const { addTodays, setAddTodays } = useExerciseContext();
 
     const handleAddTodays = (exercise: IExercise) => {
         if (addTodays.some((item) => item.id === exercise.id)) {

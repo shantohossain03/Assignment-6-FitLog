@@ -1,5 +1,6 @@
 import AddTodaysButton from '@/app/ButtonAction/addTodaysButton';
 import SavedButton from '@/app/ButtonAction/savedButton';
+import { IExercise } from '@/app/type/type';
 import React from 'react'
 
 const GetExercise = async (): Promise<IExercise[]> => {
@@ -14,6 +15,10 @@ const DetailsById = async ({ params }: { params: Promise<{ Id: string }> }) => {
   const exercises = await GetExercise();
 
   const exercise = exercises.find((exercise) => exercise.id === Number(Id));
+
+  if (!exercise) {
+    return <div className="text-white p-8">Exercise not found!</div>;
+  }
 
   console.log(exercises, "you tried this");
   return (

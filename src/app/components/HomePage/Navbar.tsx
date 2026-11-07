@@ -5,11 +5,11 @@ import React, { useContext } from 'react'
 import Logo from '@/app/assets/logo.png'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ExerciseContext } from '@/app/context/ExerContext';
+import { ExerciseContext, useExerciseContext } from '@/app/context/ExerContext';
 
 function Navbar() {
     const pathname = usePathname();
-    const { addTodays, saved, } = useContext(ExerciseContext);
+    const { addTodays, saved } = useExerciseContext();
     return (
         <div className="navbar bg-base-100 shadow-sm container mx-auto px-3 sm:px-4 py-3 sm:py-4">
             <div className="navbar-start">

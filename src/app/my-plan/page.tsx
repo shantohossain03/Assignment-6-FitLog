@@ -8,7 +8,15 @@ import { toast } from 'react-toastify';
 
 function MyPlanPage() {
 
-    const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
+    const exerciseContext = useContext(ExerciseContext);
+
+    if (!exerciseContext) {
+        throw new Error("MyPlanPage must be inside ExerProvider");
+    }
+
+    const { addTodays, setAddTodays, saved, setSaved } = exerciseContext;
+
+    
     const [doneExercises, setDoneExercises] = useState<(string | number)[]>([]);
     const [activeTab, setActiveTab] = useState("saved");
     const [sortBy, setSortBy] = useState("Duration");
