@@ -3,7 +3,17 @@
 import React, { createContext, ReactNode, useState } from 'react'
 import { IExercise } from '../type/type';
 
-export const ExerciseContext = createContext<any>({});
+
+interface IExerciseContext {
+  addTodays: IExercise[];
+  setAddTodays: React.Dispatch<React.SetStateAction<IExercise[]>>;
+  saved: IExercise[];
+  setSaved: React.Dispatch<React.SetStateAction<IExercise[]>>;
+}
+
+
+
+export const ExerciseContext = createContext<IExerciseContext | undefined>(undefined);
 
 function ExerProvider({children}: {children: ReactNode}) {
 

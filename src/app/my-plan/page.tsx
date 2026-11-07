@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 function MyPlanPage() {
 
     const { addTodays, setAddTodays, saved, setSaved } = useContext(ExerciseContext);
-    const [doneExercises, setDoneExercises] = useState<string[]>([]);;
+    const [doneExercises, setDoneExercises] = useState<(string | number)[]>([]);
     const [activeTab, setActiveTab] = useState("saved");
     const [sortBy, setSortBy] = useState("Duration");
 
@@ -25,6 +25,8 @@ function MyPlanPage() {
         if (sortBy === "Rating") {
             return b.rating - a.rating;
         }
+
+        return 0;
     });
 
 
@@ -40,6 +42,8 @@ function MyPlanPage() {
         if (sortBy === "Rating") {
             return b.rating - a.rating;
         }
+
+        return 0;
     });
 
     // console.log("TODAY'S PLAN:", addTodays);
@@ -167,7 +171,7 @@ function MyPlanPage() {
 
                                     <button className="btn btn-ghost btn-sm text-gray-400"
                                         onClick={() => {
-                                            setAddTodays(addTodays.filter((_, i) => i !== index));
+                                            setAddTodays(addTodays.filter((item) => item.id !== exercise.id));
                                             toast.error(`"${exercise.name}" Removed from your Today's Plan Item!`,
                                                 {
                                                     position: "top-center",
@@ -237,7 +241,7 @@ function MyPlanPage() {
 
                                 <button className="btn btn-ghost btn-sm text-gray-400"
                                     onClick={() => {
-                                        setSaved(saved.filter((_, i) => i !== index));
+                                        setSaved(saved.filter((item) => item.id !== exercise.id));
                                         toast.error(`"${exercise.name}" Removed from your Saved Item!`,
                                             {
                                                 position: "top-center",
