@@ -41,7 +41,7 @@ function Navbar() {
                 />
                 <a className="btn btn-ghost text-base sm:text-xl font-bold px-1">FITLOG</a>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-center hidden lg:flex absolute left-1/2 -translate-x-1/2">
                 <ul className="menu menu-horizontal px-1 flex gap-2">
                     <li>
                         <Link href="/" className={`w-25 flex justify-center text-center ${pathname === "/" ? "font-bold text-[#bdff07] bg-[#a2ff002f] rounded-2xl" : ""}`}>
